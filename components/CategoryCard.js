@@ -1,28 +1,26 @@
-import { View, Text, StyleSheet,Platform,ImageBackground } from "react-native";
+import { View, Text, StyleSheet,Platform,ImageBackground,Pressable } from "react-native";
 
 
 
-export default function CategoryCardCard({name,image}) {
- 
+export default function CategoryCardCard({categoryName,image,navigation}) {
  
     return (
-   
-    <View style={{paddingVertical:16}}>
-    <ImageBackground 
-            style={styles.card} 
-            source={image} 
-            borderRadius={16}
+        <Pressable onPress={() => navigation.navigate(categoryName,{screen:categoryName})}>
+            <View style={{paddingVertical:16}}>
+            <ImageBackground 
+                    style={styles.card} 
+                    source={image} 
+                    borderRadius={16}
+                    >
+            <View style={styles.nameContainer}>
+                <Text style={styles.name}>{categoryName}</Text>
+            </View>
 
-             >
-      <View style={styles.nameContainer}>
-        <Text style={styles.name}>{name}</Text>
-      </View>
-
-     
-    </ImageBackground>
-    </View>
-  
-  );
+            
+            </ImageBackground>
+            </View>
+            </Pressable>
+        );
 }
 
 const styles = StyleSheet.create({

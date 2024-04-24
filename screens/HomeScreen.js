@@ -1,4 +1,4 @@
-import {  StyleSheet, ImageBackground ,ScrollView ,Pressable} from "react-native";
+import {  StyleSheet, ImageBackground ,ScrollView } from "react-native";
 import CategoryCard from "../components/CategoryCard/";
 import Milkshake from '../assets/milkshake.jpg/'
 import coffee from '../assets/coffee.jpg/'
@@ -6,18 +6,34 @@ import backgroundImage from '../assets/background1.jpg/'
 
 
 export default function HomeScreen({ navigation}){
+   
+    
     return (
         
         <ImageBackground source={backgroundImage}  
                          style={{ flex: 1 }}>
             <ScrollView style={styles.container} >
-            <Pressable onPress={() => navigation.navigate("Menu")}>
-                <CategoryCard name={`משקה חם`} image={coffee} />
-           
-                <CategoryCard name={`מילקשייק`} image={Milkshake}/>
-                <CategoryCard name={`משקה קר`} image={Milkshake}/>
-                <CategoryCard name={`מילקשייק`} image={Milkshake}/>
-                </Pressable>
+                <CategoryCard categoryName={'משקה חם'} 
+                              image={coffee} 
+                              navigation={navigation}
+                               
+                               />
+
+                <CategoryCard categoryName={`מילקשייק`} 
+                              image={Milkshake}
+                              navigation={navigation} 
+                             />
+
+                <CategoryCard categoryName={`משקה קר`} image={Milkshake} 
+                              navigation={navigation} 
+                              />
+                              
+                <CategoryCard categoryName={`משקה קר`} image={Milkshake}
+                              navigation={navigation} 
+                             />
+                <CategoryCard categoryName={'קפה הבית'} image={Milkshake}
+                              navigation={navigation} 
+                             />
             </ScrollView>
         </ImageBackground>
     )
