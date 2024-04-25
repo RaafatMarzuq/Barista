@@ -10,24 +10,20 @@ import { useLayoutEffect } from 'react';
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function MenuScreen({ navigation, route }) {
-  const { name } = route.params ? route.params : "Cart";
-
-  useLayoutEffect(() => {
-      navigation.setOptions({
-      title: name,
-      });
-  }, [navigation, name]);
+export default function MenuScreen() {
+  
   return (
-    <Tab.Navigator >
+    <Tab.Navigator  screenOptions={{tabBarScrollEnabled:true}}>
         <Tab.Screen
             name='משקה חם'
             component={SubCategoryScreen}
             options={{
-              tabBarLabel: "קפה",
+            tabBarLabel: "קפה",
               // tabBarIcon: () => <Ionicons name={"home"} size={20} color="white" />,
               // tabBarBadge: 3,
             }}
+            
+            
           />
 
           <Tab.Screen

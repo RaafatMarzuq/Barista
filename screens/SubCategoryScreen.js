@@ -1,6 +1,6 @@
 import { View,Text, StyleSheet } from "react-native";
 
-export default function SubCategoryScreen({name}){
+export default function SubCategoryScreen({name }){
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Screen {name}</Text>

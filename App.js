@@ -12,19 +12,15 @@ import { FontAwesome } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
+  
+
   return (
-    <NavigationContainer theme={DarkTheme } >
+    <NavigationContainer theme={DarkTheme }  >
       
-        <Tab.Navigator 
-          screenOptions={{ 
-            tabBarLabelPosition: "below-icon",
-            //   tabBarShowLabel: false,
-            // tabBarActiveTintColor: "white",
-            // tabBarStyle:{backgroundColor:"black"}
-          }}
-        >
+        <Tab.Navigator  screenOptions={{ headerTitle: "Barista" }} >
           <Tab.Screen
-            name="Home"
+            name="ראשי"
             component={HomeScreen}
             options={{
               tabBarLabel: "ראשי",
