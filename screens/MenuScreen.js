@@ -4,7 +4,6 @@ import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import SubCategoryScreen from './SubCategoryScreen';
 import CartScreen from './CartScreen';
-import { useLayoutEffect } from 'react';
 
 
 
@@ -18,9 +17,8 @@ export default function MenuScreen() {
             name='משקה חם'
             component={SubCategoryScreen}
             options={{
-            tabBarLabel: "קפה",
-              // tabBarIcon: () => <Ionicons name={"home"} size={20} color="white" />,
-              // tabBarBadge: 3,
+            tabBarLabel: "משקה חם",
+             
             }}
             
             
@@ -31,8 +29,7 @@ export default function MenuScreen() {
             component={SubCategoryScreen}
             options={{
               tabBarLabel: "מילקשייק",
-              // tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
-              // tabBarBadge: 3,
+              
             }}
           />
           <Tab.Screen
@@ -40,8 +37,6 @@ export default function MenuScreen() {
             component={SubCategoryScreen}
             options={{
               tabBarLabel: "תה",
-              // tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
-              // tabBarBadge: 3,
             }}
           />
           <Tab.Screen
@@ -49,17 +44,13 @@ export default function MenuScreen() {
             component={SubCategoryScreen}
             options={{
             tabBarLabel: "משקה קר",
-              // tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
-              // tabBarBadge: 3,
             }}
           />
           <Tab.Screen
             name="קפה הבית"
-            component={CartScreen}
+            component={SubCategoryScreen}
             options={{
             tabBarLabel: "קפה הבית",
-              // tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
-              // tabBarBadge: 3,
             }}
           />
 

@@ -5,7 +5,7 @@ import { View, Text, StyleSheet,Platform,ImageBackground,Pressable } from "react
 export default function CategoryCardCard({categoryName,image,navigation}) {
  
     return (
-        <Pressable onPress={() => navigation.navigate(categoryName)}>
+        <Pressable onPress={() => navigation.navigate(categoryName,{name:categoryName})}>
             <View style={{paddingVertical:16}}>
             <ImageBackground 
                     style={styles.card} 

@@ -13,6 +13,7 @@ export default function HomeScreen({ navigation}){
         <ImageBackground source={backgroundImage}  
                          style={{ flex: 1 }}>
             <ScrollView style={styles.container} >
+            
                 <CategoryCard categoryName={'משקה חם'} 
                               image={coffee} 
                               navigation={navigation}

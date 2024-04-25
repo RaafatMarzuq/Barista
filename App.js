@@ -6,7 +6,7 @@ import MenuScreen from "./screens/MenuScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-
+import MyHeader from "./components/MyHeader";
 
 
 const Tab = createBottomTabNavigator();
@@ -14,11 +14,12 @@ const Tab = createBottomTabNavigator();
 export default function App() {
 
   
-
   return (
     <NavigationContainer theme={DarkTheme }  >
       
-        <Tab.Navigator  screenOptions={{ headerTitle: "Barista" }} >
+        <Tab.Navigator  screenOptions={{ 
+                                         header: (props)=><MyHeader {...props}/>
+                                          }} >
           <Tab.Screen
             name="ראשי"
             component={HomeScreen}
