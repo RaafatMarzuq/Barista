@@ -12,7 +12,7 @@ export default function MenuScreen({ navigation,route}) {
 
 
   useEffect(()=>{
-    navigation.navigate(name,{...route.params})
+    navigation.navigate(name)
   },[name])
 
   return (
@@ -24,6 +24,7 @@ export default function MenuScreen({ navigation,route}) {
             tabBarLabel: "משקה חם",
              
             }}
+            initialParams={{name:"משקה חם" }}
             
             
           />
@@ -35,6 +36,7 @@ export default function MenuScreen({ navigation,route}) {
               tabBarLabel: "מילקשייק",
               
             }}
+            initialParams={{name:"מילקשייק" }}
           />
           <Tab.Screen
             name="תה"
@@ -42,6 +44,7 @@ export default function MenuScreen({ navigation,route}) {
             options={{
               tabBarLabel: "תה",
             }}
+            initialParams={{name:"תה" }}
           />
           <Tab.Screen
             name="משקה קר"
@@ -49,6 +52,7 @@ export default function MenuScreen({ navigation,route}) {
             options={{
             tabBarLabel: "משקה קר",
             }}
+            initialParams={{name:"משקה קר" }}
           />
           <Tab.Screen
             name="קפה הבית"
@@ -56,6 +60,7 @@ export default function MenuScreen({ navigation,route}) {
             options={{
             tabBarLabel: "קפה הבית",
             }}
+            initialParams={{name:"קפה הבית" }}
           />
 
     </Tab.Navigator>
