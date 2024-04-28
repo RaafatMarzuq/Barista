@@ -1,7 +1,6 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import SubCategoryScreen from './SubCategoryScreen';
-import { useFocusEffect } from '@react-navigation/native';
-import { useState ,useEffect} from "react";
+import {useEffect} from "react";
 
 
 

@@ -42,11 +42,13 @@ export default function App() {
           <Tab.Screen
             name="הזמנות"
             component={OrdersScreen}
+            initialParams={{name:"orders" }}
             options={{
               tabBarLabel: "הזמנות",
               tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
               // tabBarBadge: 3,
             }}
+            
           />
 
         </Tab.Navigator>

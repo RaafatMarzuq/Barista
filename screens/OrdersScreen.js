@@ -14,44 +14,33 @@ import CoffeeCard from "../components/CoffeeCard";
 
 
 
-export default function CartScreen(){
+export default function OrdersScreen({route}){
   const [ordersList,setOrdersList] = useState([]);
   const[isLoading,setIsLoading] = useState(true)
  
-  const getFromLocalStorage = async (key) => {
-    try {
-      const jsonValue = await AsyncStorage.getItem(key);
-      if (jsonValue !== null) {
-        const value = JSON.parse(jsonValue);
-        setOrdersList((prevOrders) => [...prevOrders, value]);
-        setIsLoading(false);
-        console.log('Object retrieved successfully:', value);
-      } else {
-        console.log('No data found in AsyncStorage for key:', key);
-      }
-    } catch (error) {
-      console.error('Error retrieving object from AsyncStorage:', error);
-    }
-  };
- 
+  const {name} =route.params;
+  const handleRemove = (itemId) => {
+
+    const updatedOrdersList = ordersList.filter(item => item.id !== itemId);
+
+    setOrdersList(updatedOrdersList);
+  }
   useEffect(() => {
-    // fetchData();
+
   }, []); 
   
   return (
-    <SafeAreaView style={styles.container}>
-        {/* <ScrollView style={styles.scrollView} alignItems="center"  justifyContent="center"> */}
-             <FlatList
-                  data={ordersList}
-                  renderItem={({item})=>{
-                    return(<CoffeeCard coffeeData={item} onSave={()=>{}}/>)}
-                     }
-                  keyExtractor={(item)=>item.id.toString()}
-                  ItemSeparatorComponent={<View style={{height:16}} />}
-                  ListEmptyComponent={<Text style={styles.text}>אין הזמנות</Text>}
-             />
-          
-        {/* </ScrollView> */}
+        <SafeAreaView style={styles.container}>
+                <FlatList
+                      data={ordersList}
+                      renderItem={({item})=>{
+                        return(<CoffeeCard coffeeData={item} onClick={handleRemove} routeName={name}/>) }
+                        }
+                      keyExtractor={(item)=>item.id.toString()}
+                      ItemSeparatorComponent={<View style={{height:16}} />}
+                      ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
+                />
+
         </SafeAreaView>
     )
 }

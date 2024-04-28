@@ -4,14 +4,13 @@ import { SafeAreaView,
          StyleSheet,
          StatusBar,
          FlatList } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useLayoutEffect, useState ,useEffect} from "react";
+import {  useState ,useEffect} from "react";
 import CoffeeCard from "../components/CoffeeCard";
 import coffeeImage from '../assets/headerIcon.png'
 import {API_URL_MENU} from '@env'
 import axios from 'axios';
 
-export default function SubCategoryScreen({ navigation, route }) {
+export default function SubCategoryScreen({  route }) {
   const [menuItems, setMenuItems] = useState([]);
   
   const { name } = route.params ? route.params : { name: "משקה חם" };
@@ -35,7 +34,7 @@ export default function SubCategoryScreen({ navigation, route }) {
 
   
  
-    const coffee = { name :"latte", price: "10", image :coffeeImage }
+    const coffee = { id:0 ,category: "משקה קר", name :"latte", price: "10", image :coffeeImage }
   
   
     function handleSave(coffeeData){
@@ -53,14 +52,12 @@ export default function SubCategoryScreen({ navigation, route }) {
              <FlatList
                   data={menuItems}
                   renderItem={({item})=>{
-                    return(<CoffeeCard coffeeData={item} onSave={()=>{}}/>)}
+                    return(<CoffeeCard coffeeData={item} onClick={handleSave} routeName={name}/>)}
                      }
                   keyExtractor={(item)=>item.id.toString()}
                   ItemSeparatorComponent={<View style={{height:16}} />}
                   ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
              />
-            
-       
         </SafeAreaView>
     )
 };

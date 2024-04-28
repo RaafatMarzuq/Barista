@@ -1,27 +1,48 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesome6 ,MaterialCommunityIcons  } from '@expo/vector-icons';
+import { useState } from 'react';
+export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
 
-export default function CoffeeCard({ coffeeData, onSave }){
+  const [largePressed, setLargePressed] = useState(false);
+  const [smallPressed, setSmallPressed] = useState(false);
   const { name, price, image } = coffeeData;
 
   const handleSave = () => {
-    onSave({...coffeeData,size:"large"}); 
+   
+   routeName ==="orders"?  onClick(coffeeData.id) : onClick({...coffeeData,size:largePressed ? "גדול" : "קטן"}); 
   };
+ 
 
+  const handleSize = (size) => {
+    if (size === 'large') {
+      setLargePressed((prev) => !prev);
+      setSmallPressed(false); 
+    } else if (size === 'small') {
+      setSmallPressed((prev) => !prev);
+      setLargePressed(false); 
+    }
+  };
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={handleSave}>
-        <FontAwesome6  name="add" size={24} color="black" />
+        <FontAwesome6  name={routeName ==="orders" ? "trash-alt" :"add" } size={24} color="black" />
       </TouchableOpacity>
       <View style={styles.textContainer}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.price}>${price}</Text>
+        <Text style={styles.price}>₪{price}</Text>
       </View>
-      <View>
-      <MaterialCommunityIcons name="size-l" size={24} color="black" />
-      <MaterialCommunityIcons name="size-s" size={24} color="black" />
+      <View >
+        <Image source={image} style={styles.image} />
+          <View style={styles.sizeContainer}>
+            <TouchableOpacity style={styles.button} onPress={()=>handleSize('large')}>
+            <MaterialCommunityIcons name="size-l" size={24} color={largePressed ? 'white': 'black'} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={()=>handleSize('small')}>
+            <MaterialCommunityIcons name="size-s" size={24} color={smallPressed ? 'white' : 'black'} />
+            </TouchableOpacity>
+          </View>
+        
       </View>
-      <Image source={image} style={styles.image} />
     </View>
   );
 };
@@ -47,13 +68,12 @@ const styles = StyleSheet.create({
       width: 100,
       height: 100,
       borderRadius: 10,
-      marginRight: 10,
     },
     textContainer: {
-      
       flex: 1,
+      flexDirection: "row-reverse",
       alignItems: "center",
-      justifyContent: 'center',
+      justifyContent: 'space-between',
     },
     name: {
       fontSize: 18,
@@ -64,8 +84,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
     button: {
-    
-      paddingVertical: 10,
+      // paddingVertical: 1,
       paddingHorizontal: 10,
     //   borderRadius: 50,
       alignItems: 'center',
@@ -76,5 +95,12 @@ const styles = StyleSheet.create({
       color: '#ffffff',
       fontWeight: 'bold',
       fontSize: 16,
+    },
+    sizeContainer:{
+    
+     flexDirection: "row",
+     alignContent:"center",
+     alignItems:"center",
+     justifyContent:"space-evenly"
     },
   });
