@@ -1,30 +1,40 @@
-import { SafeAreaView,ScrollView, StyleSheet,StatusBar} from "react-native";
+import { SafeAreaView,
+         View,
+         Text, 
+         StyleSheet,
+         StatusBar,
+         FlatList } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState ,useEffect} from "react";
 import CoffeeCard from "../components/CoffeeCard";
 import coffeeImage from '../assets/headerIcon.png'
+import {API_URL_MENU} from '@env'
+import axios from 'axios';
 
-
-
-export default function SubCategoryScreen({navigation,route}){
+export default function SubCategoryScreen({ navigation, route }) {
+  const [menuItems, setMenuItems] = useState([]);
+  
+  const { name } = route.params ? route.params : { name: "משקה חם" };
  
   
-  const { name } = route.params ? route.params :{ name: "משקה חם"};
-  const saveToLocalStorage = async (key, value) => {
-    try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem(key, jsonValue);
-      console.log('Object saved successfully!');
-    } catch (error) {
-      console.error('Error saving object to AsyncStorage:', error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL_MENU}`);
+        const data = response.data;
+        // Filter menu items based on category
+        const filteredMenuItems = data.filter(item => item.category === name);
+        setMenuItems(filteredMenuItems);
+      } catch (error) {
+        console.error('Error fetching menu items:', error);
+      }
+    };
+
+    // fetchData();
+  }, [name]);
+
   
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: name,
-    });
-  }, [navigation, name]);
+ 
     const coffee = { name :"latte", price: "10", image :coffeeImage }
   
   
@@ -33,31 +43,38 @@ export default function SubCategoryScreen({navigation,route}){
       // saveToLocalStorage('order', coffeeData);
       alert( `${name} , ${price} , ${size}`)
     }
+
+ 
     return ( 
+     
         <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView} alignItems="center"  justifyContent="center">
            
+
+             <FlatList
+                  data={menuItems}
+                  renderItem={({item})=>{
+                    return(<CoffeeCard coffeeData={item} onSave={()=>{}}/>)}
+                     }
+                  keyExtractor={(item)=>item.id.toString()}
+                  ItemSeparatorComponent={<View style={{height:16}} />}
+                  ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
+             />
             
-            <CoffeeCard coffeeData={coffee} onSave={handleSave}/>
-            <CoffeeCard coffeeData={coffee} onSave={handleSave}/>
-            <CoffeeCard coffeeData={coffee} onSave={handleSave}/>
-            <CoffeeCard coffeeData={coffee} onSave={handleSave}/>
-            <CoffeeCard coffeeData={coffee} onSave={handleSave}/>
-            <CoffeeCard coffeeData={coffee} onSave={handleSave}/>
-            
-            {/* <Text style={styles.text}>Screen {name} </Text> */}
-            
-        </ScrollView>
+       
         </SafeAreaView>
     )
 };
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
   },
-  scrollView: {
-    paddingHorizontal: 16,
-  },
+  text:{
+    color:"white",
+    fontWeight:"bold",
+    fontSize: 20,
+    alignSelf:"center"
+  }
   });

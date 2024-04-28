@@ -1,16 +1,20 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Fontisto } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
 import SubCategoryScreen from './SubCategoryScreen';
-import CartScreen from './CartScreen';
+import { useFocusEffect } from '@react-navigation/native';
+import { useState ,useEffect} from "react";
 
 
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function MenuScreen() {
-  
+export default function MenuScreen({ navigation,route}) {
+  const { name } = route.params ? route.params : { name: "משקה חם" };
+
+
+  useEffect(()=>{
+    navigation.navigate(name,{...route.params})
+  },[name])
+
   return (
     <Tab.Navigator  screenOptions={{tabBarScrollEnabled:true}}>
         <Tab.Screen

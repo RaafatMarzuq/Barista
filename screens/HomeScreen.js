@@ -1,42 +1,44 @@
-import {  StyleSheet, ImageBackground ,ScrollView } from "react-native";
+import {  StyleSheet,ScrollView } from "react-native";
 import CategoryCard from "../components/CategoryCard/";
 import Milkshake from '../assets/milkshake.jpg/'
 import coffee from '../assets/coffee.jpg/'
-import backgroundImage from '../assets/background1.jpg/'
 
 
-export default function HomeScreen({ navigation}){
+
+
+export default function HomeScreen({ navigation , route}){
    
     
     return (
-        
-        <ImageBackground source={backgroundImage}  
-                         style={{ flex: 1 }}>
+      
             <ScrollView style={styles.container} >
             
                 <CategoryCard categoryName={'משקה חם'} 
                               image={coffee} 
                               navigation={navigation}
-                               
+                               route={route}
                                />
 
                 <CategoryCard categoryName={`מילקשייק`} 
                               image={Milkshake}
-                              navigation={navigation} 
+                              navigation={navigation}
+                              route={route} 
                              />
 
                 <CategoryCard categoryName={`משקה קר`} image={Milkshake} 
-                              navigation={navigation} 
+                              navigation={navigation}
+                              route={route} 
                               />
                               
-                <CategoryCard categoryName={`משקה קר`} image={Milkshake}
+                <CategoryCard categoryName={`תה`} image={Milkshake}
                               navigation={navigation} 
+                              route={route}
                              />
                 <CategoryCard categoryName={'קפה הבית'} image={Milkshake}
-                              navigation={navigation} 
+                              navigation={navigation}
+                              route={route} 
                              />
             </ScrollView>
-        </ImageBackground>
     )
 };
 

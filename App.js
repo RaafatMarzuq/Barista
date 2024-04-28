@@ -1,7 +1,7 @@
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/HomeScreen";
-import CartScreen from "./screens/CartScreen";
+import OrdersScreen from "./screens/OrdersScreen";
 import MenuScreen from "./screens/MenuScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Fontisto } from '@expo/vector-icons';
@@ -15,8 +15,8 @@ export default function App() {
 
   
   return (
+    
     <NavigationContainer theme={DarkTheme }  >
-      
         <Tab.Navigator  screenOptions={{ 
                                          header: (props)=><MyHeader {...props}/>
                                           }} >
@@ -26,7 +26,7 @@ export default function App() {
             options={{
               tabBarLabel: "ראשי",
               tabBarIcon: () => <Ionicons name={"home"} size={20} color="white" />,
-              // tabBarBadge: 3,
+              
             }}
           />
 
@@ -36,12 +36,12 @@ export default function App() {
             options={{
               tabBarLabel: "תפריט",
               tabBarIcon: () => <Fontisto name={"coffeescript"} size={20} color="white" />,
-              // tabBarBadge: 3,
+             
             }}
           />
           <Tab.Screen
             name="הזמנות"
-            component={CartScreen}
+            component={OrdersScreen}
             options={{
               tabBarLabel: "הזמנות",
               tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
@@ -51,5 +51,7 @@ export default function App() {
 
         </Tab.Navigator>
     </NavigationContainer>
+   
   );
 }
+

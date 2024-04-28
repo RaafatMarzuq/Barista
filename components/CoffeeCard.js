@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { FontAwesome6 } from '@expo/vector-icons';
+import { FontAwesome6 ,MaterialCommunityIcons  } from '@expo/vector-icons';
 
 export default function CoffeeCard({ coffeeData, onSave }){
   const { name, price, image } = coffeeData;
@@ -17,6 +17,10 @@ export default function CoffeeCard({ coffeeData, onSave }){
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.price}>${price}</Text>
       </View>
+      <View>
+      <MaterialCommunityIcons name="size-l" size={24} color="black" />
+      <MaterialCommunityIcons name="size-s" size={24} color="black" />
+      </View>
       <Image source={image} style={styles.image} />
     </View>
   );
@@ -29,7 +33,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'gray', 
       borderRadius: 10,
       padding: 10,
-      marginBottom: 10,
+    //   marginBottom: 10,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
