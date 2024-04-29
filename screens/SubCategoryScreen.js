@@ -19,7 +19,7 @@ export default function SubCategoryScreen({  route }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL_MENU}`);
+        const response = await axios.get(API_URL_MENU);
         const data = response.data;
         // Filter menu items based on category
         const filteredMenuItems = data.filter(item => item.category === name);
@@ -29,7 +29,7 @@ export default function SubCategoryScreen({  route }) {
       }
     };
 
-    // fetchData();
+    fetchData();
   }, [name]);
 
   
@@ -54,7 +54,7 @@ export default function SubCategoryScreen({  route }) {
                   renderItem={({item})=>{
                     return(<CoffeeCard coffeeData={item} onClick={handleSave} routeName={name}/>)}
                      }
-                  keyExtractor={(item)=>item.id.toString()}
+                  keyExtractor={(item)=>`${item.id}`}
                   ItemSeparatorComponent={<View style={{height:16}} />}
                   ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
              />

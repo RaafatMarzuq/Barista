@@ -6,7 +6,17 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
   const [largePressed, setLargePressed] = useState(false);
   const [smallPressed, setSmallPressed] = useState(false);
   const { name, price, image } = coffeeData;
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
+  const handleLoad = () => {
+    setLoading(false);
+  };
+
+  const handleError = () => {
+    setLoading(false);
+    setError(true);
+  };
   const handleSave = () => {
    
    routeName ==="orders"?  onClick(coffeeData.id) : onClick({...coffeeData,size:largePressed ? "גדול" : "קטן"}); 
@@ -31,8 +41,19 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.price}>₪{price}</Text>
       </View>
-      <View >
-        <Image source={image} style={styles.image} />
+        <View >
+        <View style={styles.imageContainer}>
+              {loading && <Text>Loading...</Text>}
+              {error && <Text>Error loading image</Text>}
+              {!loading && !error && (
+                <Image
+                  source={{uri: `data:image/jpeg;base64,${image}` }}
+                  style={styles.image}
+                  onLoad={handleLoad}
+                  onError={handleError}
+                />
+              )}
+            </View>
           <View style={styles.sizeContainer}>
             <TouchableOpacity style={styles.button} onPress={()=>handleSize('large')}>
             <MaterialCommunityIcons name="size-l" size={24} color={largePressed ? 'white': 'black'} />
@@ -43,6 +64,7 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
           </View>
         
       </View>
+      
     </View>
   );
 };
@@ -64,10 +86,15 @@ const styles = StyleSheet.create({
       shadowRadius: 3.84,
       elevation: 5,
     },
+    imageContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     image: {
-      width: 100,
-      height: 100,
-      borderRadius: 10,
+      width: 200,
+      height: 200,
+      resizeMode: 'cover',
     },
     textContainer: {
       flex: 1,
