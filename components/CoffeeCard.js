@@ -1,22 +1,17 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity,ActivityIndicator } from 'react-native';
 import { FontAwesome6 ,MaterialCommunityIcons  } from '@expo/vector-icons';
 import { useState } from 'react';
+
+
 export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
 
+
+
+  const { name, price, image } = coffeeData;
+  
   const [largePressed, setLargePressed] = useState(false);
   const [smallPressed, setSmallPressed] = useState(false);
-  const { name, price, image } = coffeeData;
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const handleLoad = () => {
-    setLoading(false);
-  };
-
-  const handleError = () => {
-    setLoading(false);
-    setError(true);
-  };
+ 
   const handleSave = () => {
    
    routeName ==="orders"?  onClick(coffeeData.id) : onClick({...coffeeData,size:largePressed ? "גדול" : "קטן"}); 
@@ -41,18 +36,13 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.price}>₪{price}</Text>
       </View>
-        <View >
+        { !(routeName==="oreders") && ( 
+          <View >
         <View style={styles.imageContainer}>
-              {loading && <Text>Loading...</Text>}
-              {error && <Text>Error loading image</Text>}
-              {!loading && !error && (
                 <Image
                   source={{uri: `data:image/jpeg;base64,${image}` }}
                   style={styles.image}
-                  onLoad={handleLoad}
-                  onError={handleError}
                 />
-              )}
             </View>
           <View style={styles.sizeContainer}>
             <TouchableOpacity style={styles.button} onPress={()=>handleSize('large')}>
@@ -61,9 +51,10 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
             <TouchableOpacity style={styles.button} onPress={()=>handleSize('small')}>
             <MaterialCommunityIcons name="size-s" size={24} color={smallPressed ? 'white' : 'black'} />
             </TouchableOpacity>
-          </View>
+          </View> 
         
       </View>
+      ) }
       
     </View>
   );
@@ -92,15 +83,17 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     image: {
-      width: 200,
-      height: 200,
+      width: 80,
+      height: 80,
       resizeMode: 'cover',
+      borderRadius:6,
     },
     textContainer: {
       flex: 1,
       flexDirection: "row-reverse",
       alignItems: "center",
       justifyContent: 'space-between',
+      paddingHorizontal:6,
     },
     name: {
       fontSize: 18,
