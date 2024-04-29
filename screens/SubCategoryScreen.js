@@ -58,6 +58,7 @@ export default function SubCategoryScreen({  route }) {
                   ItemSeparatorComponent={<View style={{height:16}} />}
                   ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
              />
+             
         </SafeAreaView>
     )
 };

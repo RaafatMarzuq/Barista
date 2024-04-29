@@ -30,13 +30,13 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={handleSave}>
-        <FontAwesome6  name={routeName ==="orders" ? "trash-alt" :"add" } size={24} color="black" />
+        <FontAwesome6  name={routeName === "orders" ? "trash-alt" :"add" } size={24} color="black" />
       </TouchableOpacity>
       <View style={styles.textContainer}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.price}>₪{price}</Text>
+        <Text style={styles.price}> ₪ {price}</Text>
       </View>
-        { !(routeName==="oreders") && ( 
+        { !(routeName==="orders") && ( 
           <View >
         <View style={styles.imageContainer}>
                 <Image
@@ -53,8 +53,8 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
             </TouchableOpacity>
           </View> 
         
-      </View>
-      ) }
+      </View>)
+       }
       
     </View>
   );

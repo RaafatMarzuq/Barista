@@ -9,15 +9,21 @@ import {
 import { useState ,useEffect} from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CoffeeCard from "../components/CoffeeCard";
-
+import coffeeImage from '../assets/coffee.jpg'
 
 
 
 
 export default function OrdersScreen({route}){
-  const [ordersList,setOrdersList] = useState([]);
-  const[isLoading,setIsLoading] = useState(true)
- 
+  const coffee1 = { id:0 ,category: "משקה קר", name :"latte", price: "10", image :coffeeImage }
+  const coffee2 = { id:1 ,category: "משקה קר", name :"milkshake", price: "5", image :coffeeImage }
+  const coffee3 = { id:2 ,category: "משקה קר", name :"moka", price: "8", image :coffeeImage }
+  const coffee4 = { id:3 ,category: "משקה קר", name :"elan", price: "9.5", image :coffeeImage }
+  const coffee5 = { id:4 ,category: "משקה קר", name :"elan", price: "100", image :coffeeImage }
+
+
+  const [ordersList,setOrdersList] = useState([coffee1,coffee2,coffee3,coffee4,coffee5]);
+  const [totalPayment,setTotalPayment]=useState(0)
   const {name} =route.params;
   const handleRemove = (itemId) => {
 
@@ -26,9 +32,14 @@ export default function OrdersScreen({route}){
     setOrdersList(updatedOrdersList);
   }
   useEffect(() => {
+    let total = 0;
+   ordersList.forEach(item => {
+    total += parseFloat(item.price);
+  });
+  setTotalPayment(total);
+    
+  }, [ordersList]); 
 
-  }, []); 
-  
   return (
         <SafeAreaView style={styles.container}>
                 <FlatList
@@ -37,10 +48,14 @@ export default function OrdersScreen({route}){
                         return(<CoffeeCard coffeeData={item} onClick={handleRemove} routeName={name}/>) }
                         }
                       keyExtractor={(item)=>item.id.toString()}
-                      ItemSeparatorComponent={<View style={{height:16}} />}
+                      ItemSeparatorComponent={<View style={{height:5}} />}
                       ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
                 />
-
+        
+        <View style={styles.paymentContainer} >
+          <Text style={[styles.text,{color: "black"}]}>סה"כ לתשלום</Text>
+          <Text style={styles.paymentText}>  ₪ {totalPayment}  </Text>
+        </View>
         </SafeAreaView>
     )
 }
@@ -51,13 +66,34 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: StatusBar.currentHeight,
   },
-  scrollView: {
-    paddingHorizontal: 16,
-  },
   text:{
     color:"white",
     fontWeight:"bold",
     fontSize: 20,
     alignSelf:"center"
   },
+  paymentContainer:{
+    width: "100%",
+    flexDirection: 'row-reverse',
+    justifyContent:"space-between",
+    backgroundColor: 'gray', 
+    padding: 10,
+  //   marginBottom: 10,
+    // shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  paymentText:{
+    borderWidth:1,
+    borderRadius:5,
+    textAlign:"center",
+    textAlignVertical: "center",
+    width:60,
+    color:"black"
+  }
   });
