@@ -8,11 +8,13 @@ import {  useState ,useEffect} from "react";
 import CoffeeCard from "../components/CoffeeCard";
 import coffeeImage from '../assets/headerIcon.png'
 import {API_URL_MENU} from '@env'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import axios from 'axios';
 
-export default function SubCategoryScreen({  route }) {
+export default function SubCategoryScreen({navigation,  route }) {
   const [menuItems, setMenuItems] = useState([]);
-  
+  const [selectedItems,setSelectedItems] =useState([])
   const { name } = route.params ? route.params : { name: "משקה חם" };
  
   
@@ -35,13 +37,37 @@ export default function SubCategoryScreen({  route }) {
   
  
     const coffee = { id:0 ,category: "משקה קר", name :"latte", price: "10", image :coffeeImage }
+    
   
-  
-    function handleSave(coffeeData){
-      const { name, price,size} = coffeeData;
-      // saveToLocalStorage('order', coffeeData);
-      alert( `${name} , ${price} , ${size}`)
+    async function handleSave(coffeeData) {
+      try {
+        setSelectedItems((prevSelected) => {
+          let found = false;
+          const updatedItems = prevSelected.map((item) => {
+            if (item.name === coffeeData.name) {
+              found = true;
+              return { ...item, quantity: item.quantity + 1 };
+            }
+            return item;
+          });
+          if (!found) {
+            // If no matching item was found, add the new item
+            return [...updatedItems, { ...coffeeData, quantity: 1 }];
+          }
+          return updatedItems;
+        });
+    
+        // Save the updated orders array back to local storage
+        await AsyncStorage.setItem('orders', JSON.stringify(selectedItems));
+    
+        console.log('Order saved to local storage');
+        return true;
+      } catch (error) {
+        console.error('Error saving order to local storage:', error);
+        return false;
+      }
     }
+    
 
  
     return ( 
