@@ -14,7 +14,7 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
  
   const handleSave = () => {
    
-   routeName ==="orders"?  onClick(coffeeData.id) : onClick({...coffeeData,size:largePressed ? "גדול" : "קטן"}); 
+   routeName ==="orders"?  onClick(coffeeData._id) : onClick({...coffeeData,size:largePressed ? "גדול" : "קטן"}); 
   };
  
 

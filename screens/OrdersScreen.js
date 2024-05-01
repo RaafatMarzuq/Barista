@@ -35,17 +35,13 @@ export default function OrdersScreen({route}){
  const handleRemove = (itemId) => {
   try {
     const updatedOrders = ordersList.map(item => {
-      if (item.id === itemId) {
-        if (item.quantity > 1) {
-          // If quantity is greater than 1, decrement the quantity
-          return { ...item, quantity: item.quantity - 1 };
-        } else {
-          // If quantity is 1, remove the item from ordersList
-          return null;
-        }
+
+      if (item._id === itemId && item.quantity >= 1) {
+        // If item matches the itemId and quantity is greater than 1, decrement quantity
+        return { ...item, quantity: item.quantity - 1 };
       }
       return item;
-    }).filter(Boolean); // Filter out null items
+    }).filter((item)=> item.quantity !==0) ;  
   
     setOrdersList(updatedOrders);
   } catch (error) {
@@ -70,7 +66,7 @@ export default function OrdersScreen({route}){
                       renderItem={({item})=>{
                         return(<CoffeeCard coffeeData={item} onClick={handleRemove} routeName={name}/>) }
                         }
-                      keyExtractor={(item)=>item._id }
+                      keyExtractor={(item)=> item._id }
                       ItemSeparatorComponent={<View style={{height:5}} />}
                       ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
                 />

@@ -76,7 +76,7 @@ export default function SubCategoryScreen({navigation,  route }) {
                   renderItem={({item})=>{
                     return(<CoffeeCard coffeeData={item} onClick={handleSave} routeName={name}/>)}
                      }
-                  keyExtractor={(item)=>`${item.id}`}
+                  keyExtractor={(item)=>item._id}
                   ItemSeparatorComponent={<View style={{height:16}} />}
                   ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
              />
