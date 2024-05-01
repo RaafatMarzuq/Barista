@@ -7,7 +7,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import MyHeader from "./components/MyHeader";
-
+import { OrdersProvider } from "./OrdersContext";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +16,7 @@ export default function App() {
   
   return (
     
+    <OrdersProvider>
     <NavigationContainer theme={DarkTheme }  >
         <Tab.Navigator  screenOptions={{ 
                                          header: (props)=><MyHeader {...props}/>
@@ -53,7 +54,7 @@ export default function App() {
 
         </Tab.Navigator>
     </NavigationContainer>
-   
+    </OrdersProvider>         
   );
 }
 

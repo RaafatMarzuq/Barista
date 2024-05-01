@@ -7,7 +7,7 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
 
 
 
-  const { name, price, image } = coffeeData;
+  const {  name, price, image , quantity} = coffeeData;
   
   const [largePressed, setLargePressed] = useState(false);
   const [smallPressed, setSmallPressed] = useState(false);
@@ -34,7 +34,9 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
       </TouchableOpacity>
       <View style={styles.textContainer}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.price}> ₪ {price}</Text>
+       {  !(routeName==="orders") ?
+                                    ( <Text style={styles.price}> ₪ {price} </Text> ):
+                                    ( <Text style={styles.price}> ₪ {price}<Text style={{fontWeight: 'bold'}}> x {quantity}</Text> </Text> ) }
       </View>
         { !(routeName==="orders") && ( 
           <View >
@@ -123,4 +125,5 @@ const styles = StyleSheet.create({
      alignItems:"center",
      justifyContent:"space-evenly"
     },
+   
   });

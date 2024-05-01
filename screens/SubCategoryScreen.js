@@ -8,15 +8,14 @@ import {  useState ,useEffect} from "react";
 import CoffeeCard from "../components/CoffeeCard";
 import coffeeImage from '../assets/headerIcon.png'
 import {API_URL_MENU} from '@env'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import axios from 'axios';
+import { useOrders } from "../OrdersContext";
 
 export default function SubCategoryScreen({navigation,  route }) {
   const [menuItems, setMenuItems] = useState([]);
-  const [selectedItems,setSelectedItems] =useState([])
   const { name } = route.params ? route.params : { name: "משקה חם" };
- 
+  const { ordersList, setOrdersList } = useOrders();
+
   
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +31,7 @@ export default function SubCategoryScreen({navigation,  route }) {
     };
 
     fetchData();
+    
   }, [name]);
 
   
@@ -41,7 +41,7 @@ export default function SubCategoryScreen({navigation,  route }) {
   
     async function handleSave(coffeeData) {
       try {
-        setSelectedItems((prevSelected) => {
+        setOrdersList((prevSelected) => {
           let found = false;
           const updatedItems = prevSelected.map((item) => {
             if (item.name === coffeeData.name) {
@@ -57,10 +57,6 @@ export default function SubCategoryScreen({navigation,  route }) {
           return updatedItems;
         });
     
-        // Save the updated orders array back to local storage
-        await AsyncStorage.setItem('orders', JSON.stringify(selectedItems));
-    
-        console.log('Order saved to local storage');
         return true;
       } catch (error) {
         console.error('Error saving order to local storage:', error);
