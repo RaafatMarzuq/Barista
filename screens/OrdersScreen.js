@@ -6,23 +6,19 @@ import {
           StyleSheet,
           StatusBar,
           View} from "react-native";
-import { useState ,useEffect,useCallback} from "react";
+import { useState ,useEffect} from "react";
 import CoffeeCard from "../components/CoffeeCard";
-import coffeeImage from '../assets/coffee.jpg'
 import { useOrders } from "../OrdersContext";
 
 
 
 
-export default function OrdersScreen({route}){
-  // const coffee1 = { id:0 ,category: "משקה קר", name :"latte", price: "10", image :coffeeImage }
-  // const coffee2 = { id:1 ,category: "משקה קר", name :"milkshake", price: "5", image :coffeeImage }
-  // const coffee3 = { id:2 ,category: "משקה קר", name :"moka", price: "8", image :coffeeImage }
-  // const coffee4 = { id:3 ,category: "משקה קר", name :"elan", price: "9.5", image :coffeeImage }
-  // const coffee5 = { id:4 ,category: "משקה קר", name :"elan", price: "100", image :coffeeImage }
 
-  // const [ordersList,setOrdersList] = useState([coffee1,coffee2,coffee3,coffee4,coffee5]);
+export default function OrdersScreen({navigation ,route}){
+ 
   const { ordersList, setOrdersList } = useOrders();
+  const [badgeCount, setBadgeCount] = useState(0);
+
 
  
  
@@ -53,11 +49,29 @@ export default function OrdersScreen({route}){
   // the seconed one is to update the total amount to pay
   useEffect(() => {
     
-    let total = 0;
-    ordersList.forEach(item => { total += (parseFloat(item.price)*item.quantity); });
+    let total = 0,totalBagCount=0;
+
+    ordersList.forEach(item => { 
+      total += (parseFloat(item.price)*item.quantity);
+      totalBagCount += item.quantity;
+    });
     setTotalPayment(total);
-    
-  }, [ordersList]); 
+    setBadgeCount(totalBagCount)
+    navigation.setOptions({
+      tabBarBadge: badgeCount > 0 ? badgeCount.toString() : null,
+    });
+  }, [navigation,badgeCount,ordersList]); 
+  // useEffect(() => {
+  //   // Fetch the badge count from somewhere (e.g., local storage)
+  //   // Here, we'll set it to a dummy value for demonstration
+  //   const fetchedBadgeCount = 3; // Fetch the badge count from somewhere
+  //   setBadgeCount(fetchedBadgeCount);
+
+  //   // Update the tabBarBadge using navigation.setOptions
+  //   navigation.setOptions({
+  //     tabBarBadge: badgeCount > 0 ? badgeCount.toString() : null,
+  //   });
+  // }, [badgeCount, navigation]);
 
   return (
         <SafeAreaView style={styles.container}>
@@ -68,13 +82,14 @@ export default function OrdersScreen({route}){
                         }
                       keyExtractor={(item)=> item._id }
                       ItemSeparatorComponent={<View style={{height:5}} />}
-                      ListEmptyComponent={<Text style={styles.text}>{name}</Text>}
+                      ListEmptyComponent={<Text style={styles.text}>אין הזמנות</Text>}
                 />
         
         <View style={styles.paymentContainer} >
           <Text style={[styles.text,{color: "black"}]}>סה"כ לתשלום</Text>
           <Text style={styles.paymentText}>  ₪ {totalPayment}  </Text>
         </View>
+
         </SafeAreaView>
     )
 }
@@ -97,8 +112,6 @@ const styles = StyleSheet.create({
     justifyContent:"space-between",
     backgroundColor: 'gray', 
     padding: 10,
-  //   marginBottom: 10,
-    // shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,

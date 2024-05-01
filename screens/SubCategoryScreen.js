@@ -51,7 +51,6 @@ export default function SubCategoryScreen({navigation,  route }) {
             return item;
           });
           if (!found) {
-            // If no matching item was found, add the new item
             return [...updatedItems, { ...coffeeData, quantity: 1 }];
           }
           return updatedItems;

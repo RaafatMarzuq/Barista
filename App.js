@@ -54,7 +54,7 @@ export default function App() {
 
         </Tab.Navigator>
     </NavigationContainer>
-    </OrdersProvider>         
+   </OrdersProvider>         
   );
 }
 
