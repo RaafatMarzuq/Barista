@@ -1,6 +1,6 @@
 import {  
           SafeAreaView,
-          ScrollView,
+          Button,
           FlatList,
           Text, 
           StyleSheet,
@@ -22,10 +22,9 @@ export default function OrdersScreen({navigation ,route}){
 
  
  
-  const [totalPayment,setTotalPayment]=useState(0)
+  const [totalAmount,setTotalAmount]=useState(0)
   const {name} =route.params;
 
- // Function to retrieve orders from local storage
 
  
  const handleRemove = (itemId) => {
@@ -33,7 +32,6 @@ export default function OrdersScreen({navigation ,route}){
     const updatedOrders = ordersList.map(item => {
 
       if (item._id === itemId && item.quantity >= 1) {
-        // If item matches the itemId and quantity is greater than 1, decrement quantity
         return { ...item, quantity: item.quantity - 1 };
       }
       return item;
@@ -46,7 +44,6 @@ export default function OrdersScreen({navigation ,route}){
 };
   
  
-  // the seconed one is to update the total amount to pay
   useEffect(() => {
     
     let total = 0,totalBagCount=0;
@@ -55,23 +52,13 @@ export default function OrdersScreen({navigation ,route}){
       total += (parseFloat(item.price)*item.quantity);
       totalBagCount += item.quantity;
     });
-    setTotalPayment(total);
+    setTotalAmount(total);
     setBadgeCount(totalBagCount)
     navigation.setOptions({
       tabBarBadge: badgeCount > 0 ? badgeCount.toString() : null,
     });
   }, [navigation,badgeCount,ordersList]); 
-  // useEffect(() => {
-  //   // Fetch the badge count from somewhere (e.g., local storage)
-  //   // Here, we'll set it to a dummy value for demonstration
-  //   const fetchedBadgeCount = 3; // Fetch the badge count from somewhere
-  //   setBadgeCount(fetchedBadgeCount);
-
-  //   // Update the tabBarBadge using navigation.setOptions
-  //   navigation.setOptions({
-  //     tabBarBadge: badgeCount > 0 ? badgeCount.toString() : null,
-  //   });
-  // }, [badgeCount, navigation]);
+  
 
   return (
         <SafeAreaView style={styles.container}>
@@ -87,13 +74,29 @@ export default function OrdersScreen({navigation ,route}){
         
         <View style={styles.paymentContainer} >
           <Text style={[styles.text,{color: "black"}]}>סה"כ לתשלום</Text>
-          <Text style={styles.paymentText}>  ₪ {totalPayment}  </Text>
+          <Text style={styles.paymentText}>  ₪ {totalAmount}  </Text>
         </View>
-
+        { totalAmount > 0  &&  
+            <Button
+              title="לתשלום"
+              buttonStyle={{
+                backgroundColor: 'gray',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+              }}
+              containerStyle={{
+                width: 200,
+                marginHorizontal: 50,
+                marginVertical: 10,
+              }}
+              titleStyle={{ fontWeight: 'bold' }}
+              onPress={()=>{navigation.navigate("Payment")}}
+            />}
+          
         </SafeAreaView>
     )
-}
-;
+};
 
 const styles = StyleSheet.create({
   container: {

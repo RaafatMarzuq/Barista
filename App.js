@@ -4,10 +4,11 @@ import HomeScreen from "./screens/HomeScreen";
 import OrdersScreen from "./screens/OrdersScreen";
 import MenuScreen from "./screens/MenuScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Fontisto } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
+import { Fontisto,FontAwesome } from '@expo/vector-icons';
 import MyHeader from "./components/MyHeader";
 import { OrdersProvider } from "./OrdersContext";
+import PaymentScreen from "./screens/PaymentScreen";
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,12 +48,21 @@ export default function App() {
             options={{
               tabBarLabel: "הזמנות",
               tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
-              // tabBarBadge: 3,
             }}
             
           />
+           <Tab.Screen
+          name="Payment"
+          component={PaymentScreen}
+          options={{
+            headerShown: false,
+            tabBarLabel: "תשלום",
+            tabBarIcon: () => <MaterialIcons name="payment" size={24} color="white" />,
+          }}
+        />
 
         </Tab.Navigator>
+
     </NavigationContainer>
    </OrdersProvider>         
   );

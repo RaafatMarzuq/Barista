@@ -6,7 +6,6 @@ import { SafeAreaView,
          FlatList } from "react-native";
 import {  useState ,useEffect} from "react";
 import CoffeeCard from "../components/CoffeeCard";
-import coffeeImage from '../assets/headerIcon.png'
 import {API_URL_MENU} from '@env'
 import axios from 'axios';
 import { useOrders } from "../OrdersContext";
@@ -17,12 +16,13 @@ export default function SubCategoryScreen({navigation,  route }) {
   const { ordersList, setOrdersList } = useOrders();
 
   
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(API_URL_MENU);
         const data = response.data;
-        // Filter menu items based on category
+
         const filteredMenuItems = data.filter(item => item.category === name);
         setMenuItems(filteredMenuItems);
       } catch (error) {
@@ -36,7 +36,6 @@ export default function SubCategoryScreen({navigation,  route }) {
 
   
  
-    const coffee = { id:0 ,category: "משקה קר", name :"latte", price: "10", image :coffeeImage }
     
   
     async function handleSave(coffeeData) {

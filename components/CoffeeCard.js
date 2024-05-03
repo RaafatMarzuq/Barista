@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity,ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesome6 ,MaterialCommunityIcons  } from '@expo/vector-icons';
 import { useState } from 'react';
-
+import MilkOptions from './MilkOptions';
 
 export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
 
@@ -11,6 +11,32 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
   
   const [largePressed, setLargePressed] = useState(false);
   const [smallPressed, setSmallPressed] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [checked0, set0Checked] = useState(false);
+  const [checked1, set1Checked] = useState(false);
+  const [checked2, set2Checked] = useState(false);
+
+  const toggleVisibility = () => {
+    setVisible(!visible);
+  };
+
+  const handleCheckbox0Change = () => {
+    set0Checked(!checked0);
+    set1Checked(false);
+    set2Checked(false);
+  };
+  const handleCheckbox1Change = () => {
+    set1Checked(!checked1);
+    set0Checked(false);
+    set2Checked(false);
+  };
+  const handleCheckbox2Change = () => {
+    set2Checked(!checked2);
+    set1Checked(false);
+    set0Checked(false);
+  };
+  
+ 
  
   const handleSave = () => {
    
@@ -33,7 +59,7 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
         <FontAwesome6  name={routeName === "orders" ? "trash-alt" :"add" } size={24} color="black" />
       </TouchableOpacity>
       <View style={styles.textContainer}>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name}>{name} </Text>
        {  !(routeName==="orders") ?
                                     ( <Text style={styles.price}> ₪ {price} </Text> ):
                                     ( <Text style={styles.price}> ₪ {price}<Text style={{fontWeight: 'bold'}}> x {quantity}</Text> </Text> ) }
@@ -42,7 +68,7 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
           <View >
         <View style={styles.imageContainer}>
                 <Image
-                  source={{uri: `data:image/jpeg;base64,${image}` }}
+                  source={{ uri: `data:image/jpeg;base64,${image}` }}
                   style={styles.image}
                 />
             </View>
@@ -54,10 +80,11 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
             <MaterialCommunityIcons name="size-s" size={24} color={smallPressed ? 'white' : 'black'} />
             </TouchableOpacity>
           </View> 
-        
-      </View>)
+      </View>) 
+
        }
-      
+       
+   
     </View>
   );
 };
@@ -67,9 +94,8 @@ const styles = StyleSheet.create({
       width: "100%",
       flexDirection: 'row',
       backgroundColor: 'gray', 
-      borderRadius: 10,
+      borderRadius : 10 ,
       padding: 10,
-    //   marginBottom: 10,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
