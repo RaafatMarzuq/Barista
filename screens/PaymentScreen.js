@@ -15,6 +15,7 @@ export default function PaymentScreen({ route }) {
     let errors = {};
 
     if (!name) errors.name = "חסר שם להזמנה";
+    if (!totalAmount) errors.totalAmount = "סל הקניות שלך ריק";
 
     setErrors(errors);
 
@@ -48,6 +49,9 @@ export default function PaymentScreen({ route }) {
     >
         <Text style={styles.title}>תשלום</Text>
         <Text style={styles.amount}>₪ {totalAmount}</Text>
+        {errors.totalAmount ? (
+          <Text style={styles.errorText}>{errors.totalAmount}</Text>
+        ) : null}
         <TextInput
           style={styles.input}
           placeholder="שם"

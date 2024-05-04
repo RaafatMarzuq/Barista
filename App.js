@@ -57,7 +57,7 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarLabel: "תשלום",
-            tabBarIcon: () => <MaterialIcons name="payment" size={24} color="white" />,
+            tabBarIcon: () => <MaterialIcons name="payment" size={20} color="white" />,
           }}
         />
 
