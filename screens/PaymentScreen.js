@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { useOrders } from "../OrdersContext";
+import axios from 'axios';
 
 export default function PaymentScreen({ route }) {
   
@@ -22,13 +23,23 @@ export default function PaymentScreen({ route }) {
     return Object.keys(errors).length === 0;
   };
 
-  const handlePayment = () => {
-    
-    if (validateForm()) {
-    alert(`${name} , ${notes}`);
-    setName('');
-    setNotes('');
-    setErrors({})
+  const handlePayment = async () => {
+    try {
+        if (validateForm()) {
+            const order = {
+                items: ordersList,
+                totalPrice: totalAmount,
+                customerName: name,
+                notes: notes
+            };
+            await axios.post(process.env.API_URL_ORDERS, order);
+            // alert(`${name} , ${notes}`);
+            setName('');
+            setNotes('');
+            setErrors({});
+        }
+    } catch (error) {
+        console.error('Error occurred while processing payment:', error);
     }
   };
 
