@@ -16,7 +16,7 @@ import { useOrders } from "../OrdersContext";
 
 export default function OrdersScreen({navigation ,route}){
  
-  const { ordersList, setOrdersList } = useOrders();
+  const { ordersList, setOrdersList ,setIsPaymentReady } = useOrders();
   const [badgeCount, setBadgeCount] = useState(0);
 
 
@@ -57,6 +57,7 @@ export default function OrdersScreen({navigation ,route}){
     navigation.setOptions({
       tabBarBadge: badgeCount > 0 ? badgeCount.toString() : null,
     });
+    totalAmount > 0 ? setIsPaymentReady(true) : setIsPaymentReady(false);
   }, [navigation,badgeCount,ordersList]); 
   
 

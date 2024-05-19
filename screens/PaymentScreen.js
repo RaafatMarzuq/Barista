@@ -33,8 +33,7 @@ export default function PaymentScreen({ route }) {
                 notes: notes
             };
             await axios.post(process.env.API_URL_ORDERS, order);
-            // alert(`${name} , ${notes}`);
-            setName('');
+            setName('') ;
             setNotes('');
             setErrors({});
         }

@@ -1,12 +1,14 @@
-import React, { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 const OrdersContext = createContext();
 
 export const OrdersProvider = ({ children }) => {
+
   const [ordersList, setOrdersList] = useState([]);
-  
+  const [isPaymentReady, setIsPaymentReady] = useState(false);
+
   return (
-    <OrdersContext.Provider value={{ ordersList, setOrdersList }}>
+    <OrdersContext.Provider value={{ ordersList, setOrdersList,  isPaymentReady, setIsPaymentReady }}>
       {children}
     </OrdersContext.Provider>
   );
