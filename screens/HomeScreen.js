@@ -13,19 +13,19 @@ export default function HomeScreen({ navigation , route}){
       
             <ScrollView style={styles.container} >
             
-                <CategoryCard categoryName={'משקה חם'} 
+                <CategoryCard categoryName={'משקאות חמים'} 
                               image={coffee} 
                               navigation={navigation}
                                route={route}
                                />
 
-                <CategoryCard categoryName={`מילקשייק`} 
+                <CategoryCard categoryName={`מילקשייקים`} 
                               image={Milkshake}
                               navigation={navigation}
                               route={route} 
                              />
 
-                <CategoryCard categoryName={`משקה קר`} image={Milkshake} 
+                <CategoryCard categoryName={`משקאות קרים`} image={Milkshake} 
                               navigation={navigation}
                               route={route} 
                               />
