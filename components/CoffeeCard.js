@@ -38,7 +38,7 @@ export default function CoffeeCard({ coffeeData, onClick ,routeName  }){
       <View style={styles.textContainer}>
         <Text style={styles.name}>{name} </Text>
        {  !(routeName==="orders") ?
-                                    ( <Text style={styles.price}> ₪ {price} </Text> ):
+                                    ( <Text style={styles.price}> ₪ {price+2}/ {price} </Text> ):
                                     ( <Text style={styles.price}> ₪ {price}<Text style={{fontWeight: 'bold'}}> x {quantity}</Text> </Text> ) }
       </View>
         { !(routeName==="orders") && ( 

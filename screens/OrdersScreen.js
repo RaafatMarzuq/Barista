@@ -49,7 +49,9 @@ export default function OrdersScreen({navigation ,route}){
     let total = 0,totalBagCount=0;
 
     ordersList.forEach(item => { 
-      total += (parseFloat(item.price)*item.quantity);
+     item.size === "קטן" ? 
+     total += (parseFloat(item.price)*item.quantity):
+     total += (parseFloat(item.price + 2)*item.quantity);
       totalBagCount += item.quantity;
     });
     setTotalAmount(total);

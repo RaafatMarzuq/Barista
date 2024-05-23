@@ -2,7 +2,9 @@ import {  StyleSheet,ScrollView } from "react-native";
 import CategoryCard from "../components/CategoryCard/";
 import Milkshake from '../assets/milkshake.jpg/'
 import coffee from '../assets/coffee.jpg/'
-
+import coffeeBeans from '../assets/coffeeBeans.jpg/'
+import coldDrinks from '../assets/coldDrinks.jpg/'
+import teacup from '../assets/teacup.jpg/'
 
 
 
@@ -25,16 +27,16 @@ export default function HomeScreen({ navigation , route}){
                               route={route} 
                              />
 
-                <CategoryCard categoryName={`משקאות קרים`} image={Milkshake} 
+                <CategoryCard categoryName={`משקאות קרים`} image={coldDrinks} 
                               navigation={navigation}
                               route={route} 
                               />
                               
-                <CategoryCard categoryName={`תה`} image={Milkshake}
+                <CategoryCard categoryName={`תה`} image={teacup}
                               navigation={navigation} 
                               route={route}
                              />
-                <CategoryCard categoryName={'קפה הבית'} image={Milkshake}
+                <CategoryCard categoryName={'קפה הבית'} image={coffeeBeans}
                               navigation={navigation}
                               route={route} 
                              />
