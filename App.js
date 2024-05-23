@@ -8,15 +8,16 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Fontisto, FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import MyHeader from "./components/MyHeader";
-import { OrdersProvider, useOrders } from "./OrdersContext";
+import { OrdersProvider } from "./OrdersContext";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
-  const { isPaymentReady } = useOrders();
 
+export default function App() {
   return (
-    <Tab.Navigator screenOptions={{ header: (props) => <MyHeader {...props} /> }}>
+    <OrdersProvider>
+      <NavigationContainer theme={DarkTheme}>
+      <Tab.Navigator screenOptions={{ header: (props) => <MyHeader {...props} /> }}>
       <Tab.Screen
         name="ראשי"
         component={HomeScreen}
@@ -42,7 +43,7 @@ const TabNavigator = () => {
           tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
         }}
       />
-      {isPaymentReady && (
+      
         <Tab.Screen
           name="Payment"
           component={PaymentScreen}
@@ -52,17 +53,8 @@ const TabNavigator = () => {
             tabBarIcon: () => <MaterialIcons name="payment" size={20} color="white" />,
           }}
         />
-      )}
-    </Tab.Navigator>
-  );
-};
-
-export default function App() {
-  return (
-    <OrdersProvider>
-      <NavigationContainer theme={DarkTheme}>
-        <TabNavigator />
-      </NavigationContainer>
+    
+    </Tab.Navigator>      </NavigationContainer>
     </OrdersProvider>
   );
 }

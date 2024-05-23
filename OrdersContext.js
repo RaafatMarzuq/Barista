@@ -5,10 +5,9 @@ const OrdersContext = createContext();
 export const OrdersProvider = ({ children }) => {
 
   const [ordersList, setOrdersList] = useState([]);
-  const [isPaymentReady, setIsPaymentReady] = useState(false);
 
   return (
-    <OrdersContext.Provider value={{ ordersList, setOrdersList,  isPaymentReady, setIsPaymentReady }}>
+    <OrdersContext.Provider value={{ ordersList, setOrdersList}}>
       {children}
     </OrdersContext.Provider>
   );
