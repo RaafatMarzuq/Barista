@@ -25,11 +25,9 @@ export default function CategoryCard({categoryName,image,navigation,route}) {
 
 const styles = StyleSheet.create({
   card: {
-    height :200 ,
-    width :"100%" ,
-     
-    alignItems :"center" ,
-    alignContent:"center",
+    width: "100%",
+    alignItems: "center",
+    alignContent: "center",
     ...Platform.select({
       ios: {
         shadowOffset: { width: 2, height: 2 },
@@ -40,20 +38,28 @@ const styles = StyleSheet.create({
       android: {
         elevation: 5,
       },
-      
+      web: {
+        height: 800,
+        justifyContent: "center",
+        display: "flex",
+      },
     }),
   },
   nameContainer: {
-    paddingHorizontal:16,
-    paddingVertical:70,
+    paddingHorizontal: 16,
+    paddingVertical: 70,
     justifyContent: "center",
     alignContent: "center",
+    
   },
   name: {
     fontSize: 30,
     fontWeight: "bold",
-  },
- 
+    textAlign:"center",
+    backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    borderRadius:10,
+    paddingHorizontal:15,
+    paddingVertical:1,
 
- 
+  },
 });

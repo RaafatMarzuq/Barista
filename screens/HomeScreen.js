@@ -3,7 +3,7 @@ import CategoryCard from "../components/CategoryCard/";
 import Milkshake from '../assets/milkshake.jpg/'
 import coffee from '../assets/coffee.jpg/'
 import coffeeBeans from '../assets/coffeeBeans.jpg/'
-import coldDrinks from '../assets/coldDrinks.jpg/'
+import coldDrinks from '../assets/cold-drinks.jpg/'
 import teacup from '../assets/teacup.jpg/'
 
 
