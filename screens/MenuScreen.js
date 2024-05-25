@@ -17,25 +17,25 @@ export default function MenuScreen({ navigation,route}) {
   return (
     <Tab.Navigator  screenOptions={{tabBarScrollEnabled:true}}>
         <Tab.Screen
-            name='משקה חם'
+            name='משקאות חמים'
             component={SubCategoryScreen}
             options={{
-            tabBarLabel: "משקה חם",
+            tabBarLabel: "משקאות חמים",
              
             }}
-            initialParams={{name:"משקה חם" }}
+            initialParams={{name:"משקאות חמים" }}
             
             
           />
 
           <Tab.Screen
-            name="מילקשייק"
+            name="מילקשייקים"
             component={SubCategoryScreen}
             options={{
-              tabBarLabel: "מילקשייק",
+              tabBarLabel: "מילקשייקים",
               
             }}
-            initialParams={{name:"מילקשייק" }}
+            initialParams={{name:"מילקשייקים" }}
           />
           <Tab.Screen
             name="תה"
@@ -46,12 +46,12 @@ export default function MenuScreen({ navigation,route}) {
             initialParams={{name:"תה" }}
           />
           <Tab.Screen
-            name="משקה קר"
+            name="משקאות קרים"
             component={SubCategoryScreen}
             options={{
-            tabBarLabel: "משקה קר",
+            tabBarLabel: "משקאות קרים",
             }}
-            initialParams={{name:"משקה קר" }}
+            initialParams={{name:"משקאות קרים" }}
           />
           <Tab.Screen
             name="קפה הבית"
