@@ -22,7 +22,7 @@ export default function App() {
         name="ראשי"
         component={HomeScreen}
         options={{
-          tabBarLabel: "ראשי",
+          tabBarLabel: "ראשי" ,
           tabBarIcon: () => <Ionicons name={"home"} size={20} color="white" />,
         }}
       />
@@ -40,7 +40,7 @@ export default function App() {
         initialParams={{ name: "orders" }}
         options={{
           tabBarLabel: "הזמנות",
-          tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" />,
+          tabBarIcon: () => <FontAwesome name="opencart" size={20} color="white" /> ,
         }}
       />
       

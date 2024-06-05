@@ -2,7 +2,7 @@ import { View, Text, StyleSheet,Platform,ImageBackground,Pressable } from "react
 
 
 
-export default function CategoryCard({categoryName,image,navigation,route}) {
+export default function CategoryCard({categoryName,image,navigation}) {
  
     return (
         <Pressable onPress={() => navigation.navigate("Menu",{name:categoryName})}>

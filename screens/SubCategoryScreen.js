@@ -20,7 +20,7 @@ export default function SubCategoryScreen({navigation,  route }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(API_URL_MENU);
+        const response = await axios.get("https://my-coffee-shop-d611583f7573.herokuapp.com/menu");
         const data = response.data;
 
         const filteredMenuItems = data.filter(item => item.category === name);
@@ -38,30 +38,32 @@ export default function SubCategoryScreen({navigation,  route }) {
  
     
   
-    async function handleSave(coffeeData) {
-      try {
-        setOrdersList((prevSelected) => {
-          let found = false;
-          const updatedItems = prevSelected.map((item) => {
-            if (item.name === coffeeData.name) {
-              found = true;
-              return { ...item, quantity: item.quantity + 1 };
-            }
-            return item;
-          });
-          if (!found) {
-            return [...updatedItems, { ...coffeeData, quantity: 1 }];
+  async function handleSave(coffeeData) {
+    try {
+      const { image, ...dataWithoutImage } = coffeeData;
+  
+      setOrdersList((prevSelected) => {
+        let found = false;
+        const updatedItems = prevSelected.map((item) => {
+          if (item.name === dataWithoutImage.name) {
+            found = true;
+            return { ...item, quantity: item.quantity + 1 };
           }
-          return updatedItems;
+          return item;
         });
-    
-        return true;
-      } catch (error) {
-        console.error('Error saving order to local storage:', error);
-        return false;
-      }
+        if (!found) {
+          return [...updatedItems, { ...dataWithoutImage, quantity: 1 }];
+        }
+        return updatedItems;
+      });
+      
+      return true;
+    } catch (error) {
+      console.error('Error saving order to local storage:', error);
+      return false;
     }
-    
+  }
+  
 
  
     return ( 

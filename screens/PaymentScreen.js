@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import  { useState, useEffect } from 'react';
+import {  Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { useOrders } from "../OrdersContext";
 import axios from 'axios';
 
-export default function PaymentScreen({ route }) {
+export default function PaymentScreen() {
   
-  const { ordersList, setOrdersList } = useOrders();
+  const { ordersList} = useOrders();
 
   const [name, setName] = useState('');
   const [notes,setNotes] = useState('');
@@ -25,14 +25,16 @@ export default function PaymentScreen({ route }) {
 
   const handlePayment = async () => {
     try {
-        if (validateForm()) {
+      const flag = validateForm();
+        if (flag) {
             const order = {
                 items: ordersList,
                 totalPrice: totalAmount,
                 customerName: name,
                 notes: notes
             };
-            await axios.post(process.env.API_URL_ORDERS, order);
+            await axios.post( `${process.env.API_URL_ORDERS} `, order);
+
             setName('') ;
             setNotes('');
             setErrors({});
