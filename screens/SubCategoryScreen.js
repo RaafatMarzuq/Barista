@@ -12,7 +12,7 @@ import { useOrders } from "../OrdersContext";
 
 export default function SubCategoryScreen({navigation,  route }) {
   const [menuItems, setMenuItems] = useState([]);
-  const { name } = route.params ? route.params : { name: "משקה חם" };
+  const { name } = route.params ? route.params : { name: "משקאות חמים" };
   const { ordersList, setOrdersList } = useOrders();
 
   

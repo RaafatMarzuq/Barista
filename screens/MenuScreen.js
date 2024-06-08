@@ -7,7 +7,7 @@ import {useEffect} from "react";
 const Tab = createMaterialTopTabNavigator();
 
 export default function MenuScreen({ navigation,route}) {
-  const { name } = route.params ? route.params : { name: "משקה חם" };
+  const { name } = route.params ? route.params : { name: "משקאות חמים" };
 
 
   useEffect(()=>{

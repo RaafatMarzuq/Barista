@@ -8,7 +8,7 @@ export default function MyHeader() {
         <StatusBar/>
             <View style={styles.headerContainer}>
                 <Image style={styles.headerLogo} source={Logo} />
-                <Text style={styles.headerText}>Barista</Text>
+                <Text style={styles.headerText}>MyCoffee</Text>
             </View>
         </SafeAreaView>
     );
