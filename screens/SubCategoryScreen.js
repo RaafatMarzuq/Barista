@@ -6,25 +6,25 @@ import { SafeAreaView,
          FlatList } from "react-native";
 import {  useState ,useEffect} from "react";
 import CoffeeCard from "../components/CoffeeCard";
-import {API_URL_MENU} from '@env'
-import axios from 'axios';
 import { useOrders } from "../OrdersContext";
 
 export default function SubCategoryScreen({navigation,  route }) {
-  const [menuItems, setMenuItems] = useState([]);
+  const [categoryItems, setCategoryItems] = useState([]);
   const { name } = route.params ? route.params : { name: "משקאות חמים" };
-  const { ordersList, setOrdersList } = useOrders();
+  const { ordersList, setOrdersList ,menuList } = useOrders();
 
   
  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://my-coffee-shop-d611583f7573.herokuapp.com/menu");
-        const data = response.data;
-
+       
+       if (menuList) {
+         const data = menuList;
         const filteredMenuItems = data.filter(item => item.category === name);
-        setMenuItems(filteredMenuItems);
+        setCategoryItems(filteredMenuItems);
+       } 
+       
       } catch (error) {
         console.error('Error fetching menu items:', error);
       }
@@ -72,7 +72,7 @@ export default function SubCategoryScreen({navigation,  route }) {
            
 
              <FlatList
-                  data={menuItems}
+                  data={categoryItems}
                   renderItem={({item})=>{
                     return(<CoffeeCard coffeeData={item} onClick={handleSave} routeName={name}/>)}
                      }

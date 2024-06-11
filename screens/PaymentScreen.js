@@ -33,7 +33,7 @@ export default function PaymentScreen() {
                 customerName: name,
                 notes: notes
             };
-            await axios.post( `${process.env.API_URL_ORDERS} `, order);
+            await axios.post( `https://my-coffee-shop-d611583f7573.herokuapp.com/order`, order);
 
             setName('') ;
             setNotes('');
@@ -50,6 +50,7 @@ export default function PaymentScreen() {
       total += (parseFloat(item.price) * item.quantity);
     });
     setTotalAmount(total);
+   
   }, [ordersList]); 
 
   return (
